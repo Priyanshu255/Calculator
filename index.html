@@ -12,7 +12,8 @@
     <div class="calculator">
         <div class="buttons">
             <h2 id="value"></h2>
-            <span id="clear">Clear</span>
+            <span id="ac">AC</span>
+            <span id="del">DEL</span>
             <span>/</span>
             <span>*</span>
             <span>7</span>
@@ -38,14 +39,21 @@
         let value = document.getElementById('value');
         let tooglebtn = document.querySelector('.tooglebtn');
         let body = document.querySelector('body');
-
         for(let i=0; i<btn.length; i++){
             btn[i].addEventListener("click" , function(){
                 if(this.innerHTML == "="){
-                    value.innerHTML = eval(value.innerHTML);
+                    try{
+                        value.innerHTML = eval(value.innerHTML);
+                    }catch(e){
+                        // console.log(e);
+                        alert("Invalid Expression!!");
+                    }
+                }
+                else if(this.innerHTML == "DEL"){
+                    value.innerHTML = value.innerHTML.slice(0,-1);
                 }
                 else{
-                    if(this.innerHTML == "Clear"){
+                    if(this.innerHTML == "AC"){
                         value.innerHTML = "";
                     }
                     else{
